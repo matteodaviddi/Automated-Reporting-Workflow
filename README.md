@@ -1,13 +1,13 @@
-# 📊 Automated Sales Report
+# 📊 Automated Reporting Workflow
 ### Make + Google Sheets + OpenAI + QuickChart + Gmail
 
-An automated reporting system that reads sales data from Google Sheets, analyzes it with OpenAI GPT-4, generates professional HTML reports with charts via QuickChart, and delivers them via email — fully automated with Make.
+An automated reporting system that reads data from Google Sheets, analyzes it with OpenAI GPT-4, generates professional HTML reports with charts via QuickChart, and delivers them via email — fully automated with Make.
 
 ---
 
 ## 🚀 What it does
 
-- **Reads** sales data automatically from Google Sheets every day
+- **Reads** data automatically from Google Sheets every day
 - **Aggregates** all rows into a single structured text
 - **Analyzes** the data with OpenAI GPT-4, generating a report with:
   - Introductory message
@@ -23,7 +23,7 @@ An automated reporting system that reads sales data from Google Sheets, analyzes
 
 ## 🎬 Demo
 
-> 📹 [Watch the demo](#) ← *add your Loom link here*
+> 📹 [Watch the demo](#) 
 
 ---
 

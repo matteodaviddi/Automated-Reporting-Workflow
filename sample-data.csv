@@ -1,0 +1,13 @@
+Mese,Categoria,Prodotto,Unità vendute,Fatturato (€),Trend,,RIEPILOGO,
+Gennaio,Elettronica,Cuffie BT Pro,142,14200,"0,12",,Fatturato Totale,110570
+Gennaio,Abbigliamento,Giacca Invernale,89,8010,"0,05",,Unità Totali,1749
+Gennaio,Casa,Lampada Smart,210,6300,0%,,Fatturato Medio,"9214,166667"
+Febbraio,Elettronica,Cuffie BT Pro,160,16000,"0,13",,Prodotto Migliore,Cuffie BT Pro
+Febbraio,Abbigliamento,Giacca Invernale,74,6660,-17%,,Mese Migliore,Aprile
+Febbraio,Casa,Lampada Smart,195,5850,-7%,,Prodotto Peggiore,Giacca Invernale
+Marzo,Elettronica,Cuffie BT Pro,134,13400,-16%,,,
+Marzo,Abbigliamento,Giacca Invernale,51,4590,-31%,,,
+Marzo,Casa,Lampada Smart,230,6900,"0,18",,,
+Aprile,Elettronica,Cuffie BT Pro,178,17800,"0,33",,,
+Aprile,Abbigliamento,Giacca Invernale,38,3420,-25%,,,
+Aprile,Casa,Lampada Smart,248,7440,"0,08",,,

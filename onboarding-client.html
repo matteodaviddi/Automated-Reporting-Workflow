@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Automation — Client Onboarding</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --border: #222222;
+    --accent: #c8f135;
+    --accent-dim: rgba(200, 241, 53, 0.08);
+    --text: #f0f0f0;
+    --muted: #666666;
+    --error: #ff4d4d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    padding: 60px 24px;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .header {
+    margin-bottom: 64px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 4px 12px;
+    margin-bottom: 28px;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 6vw, 54px);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 480px;
+  }
+
+  .section {
+    margin-bottom: 48px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.2s; }
+  .section:nth-child(4) { animation-delay: 0.3s; }
+  .section:nth-child(5) { animation-delay: 0.4s; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .field {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  label span {
+    color: var(--accent);
+    margin-left: 2px;
+  }
+
+  input, textarea, select {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 14px 16px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    appearance: none;
+    border-radius: 0;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: #333;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.6;
+  }
+
+  select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+  }
+
+  select option {
+    background: #111;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .checkbox-item:hover {
+    border-color: #444;
+  }
+
+  .checkbox-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    accent-color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .checkbox-item.checked {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+  }
+
+  .checkbox-label {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .checkbox-label small {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 2px;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  .submit-area {
+    animation: fadeUp 0.6s ease 0.5s both;
+  }
+
+  .note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 24px;
+    line-height: 1.6;
+    border-left: 2px solid var(--border);
+    padding-left: 16px;
+  }
+
+  button {
+    width: 100%;
+    background: var(--accent);
+    color: #0a0a0a;
+    border: none;
+    padding: 18px;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    font-weight: 500;
+  }
+
+  button:hover { opacity: 0.9; }
+  button:active { transform: scale(0.99); }
+
+  .success {
+    display: none;
+    text-align: center;
+    padding: 64px 0;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .success-icon {
+    font-size: 48px;
+    margin-bottom: 24px;
+  }
+
+  .success h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 12px;
+  }
+
+  .success p {
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 520px) {
+    .row { grid-template-columns: 1fr; }
+    body { padding: 40px 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="badge">AI Automation</div>
+    <h1>Let's build your<br><em>custom report</em></h1>
+    <p class="subtitle">Fill in the details below so I can configure your automated reporting system exactly the way you need it.</p>
+  </div>
+
+  <form id="form">
+
+    <!-- SECTION 1 -->
+    <div class="section">
+      <div class="section-label">01 — About you</div>
+
+      <div class="row">
+        <div class="field">
+          <label>Full name <span>*</span></label>
+          <input type="text" placeholder="John Smith" required>
+        </div>
+        <div class="field">
+          <label>Company / Project</label>
+          <input type="text" placeholder="Acme Inc.">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Email address <span>*</span></label>
+        <input type="email" placeholder="john@company.com" required>
+      </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="section">
+      <div class="section-label">02 — Your data</div>
+
+      <div class="field">
+        <label>Where is your data? <span>*</span></label>
+        <select required>
+          <option value="" disabled selected>Select a source</option>
+          <option>Google Sheets</option>
+          <option>Excel / OneDrive</option>
+          <option>Airtable</option>
+          <option>Notion</option>
+          <option>CRM (HubSpot, Salesforce...)</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>What type of data do you track? <span>*</span></label>
+        <div class="checkbox-group" id="dataTypes">
+          <label class="checkbox-item">
+            <input type="checkbox" value="sales"> 
+            <span class="checkbox-label">Sales & Revenue <small>Orders, products, invoices</small></span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="marketing"> 
+            <span class="checkbox-label">Marketing & Traffic <small>Campaigns, leads, conversions</small></span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="hr"> 
+            <span class="checkbox-label">HR & Team <small>Attendance, performance, hiring</small></span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="finance"> 
+            <span class="checkbox-label">Finance & Budget <small>Expenses, forecasts, P&L</small></span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="operations"> 
+            <span class="checkbox-label">Operations <small>Inventory, logistics, KPIs</small></span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="other"> 
+            <span class="checkbox-label">Other <small>Describe below</small></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Describe your columns / data structure</label>
+        <textarea placeholder="e.g. Date | Product | Units sold | Revenue | Region | Status"></textarea>
+      </div>
+
+      <div class="field">
+        <label>How often is the data updated?</label>
+        <select>
+          <option value="" disabled selected>Select frequency</option>
+          <option>In real time</option>
+          <option>Every day</option>
+          <option>Every week</option>
+          <option>Every month</option>
+          <option>Manually, when needed</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="section">
+      <div class="section-label">03 — The report</div>
+
+      <div class="field">
+        <label>What KPIs matter most to you?</label>
+        <textarea placeholder="e.g. Total monthly revenue, best-selling product, worst performing region, week-on-week growth..."></textarea>
+      </div>
+
+      <div class="field">
+        <label>What tone should the report have?</label>
+        <select>
+          <option value="" disabled selected>Select a tone</option>
+          <option>Executive — very concise, just the numbers</option>
+          <option>Analytical — detailed with commentary</option>
+          <option>Narrative — story-driven, easy to read</option>
+          <option>Technical — data-heavy, for internal teams</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Any specific sections you want included?</label>
+        <textarea placeholder="e.g. comparison with previous month, top 3 products, regional breakdown, recommendations..."></textarea>
+      </div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="section">
+      <div class="section-label">04 — Delivery</div>
+
+      <div class="field">
+        <label>Where should the report be delivered? <span>*</span></label>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" value="email">
+            <span class="checkbox-label">Email <small>Gmail or Outlook</small></span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="slack">
+            <span class="checkbox-label">Slack <small>Channel or DM</small></span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="gdoc">
+            <span class="checkbox-label">Google Doc <small>Saved automatically in Drive</small></span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" value="whatsapp">
+            <span class="checkbox-label">WhatsApp <small>Via Twilio or similar</small></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label>How often?</label>
+          <select>
+            <option value="" disabled selected>Select</option>
+            <option>Every day</option>
+            <option>Every week</option>
+            <option>Every month</option>
+            <option>Custom</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Preferred time</label>
+          <input type="time" value="08:00">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Who receives the report?</label>
+        <input type="text" placeholder="Just me / team of 5 / list of emails...">
+      </div>
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="section">
+      <div class="section-label">05 — Access & extras</div>
+
+      <div class="field">
+        <label>Do you have your own OpenAI API key?</label>
+        <select>
+          <option value="" disabled selected>Select</option>
+          <option>Yes, I'll provide it</option>
+          <option>No, include it in the price</option>
+          <option>Not sure, let's discuss</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Anything else I should know?</label>
+        <textarea placeholder="Specific requirements, deadlines, budget, other tools you use..."></textarea>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="submit-area">
+      <p class="note">I'll review your answers and get back to you within 24 hours with a tailored proposal and a sample report based on your data.</p>
+      <button type="submit">Send onboarding form →</button>
+    </div>
+
+  </form>
+
+  <div class="success" id="success">
+    <div class="success-icon">✦</div>
+    <h2>Thank you!</h2>
+    <p>I'll be in touch within 24 hours.<br>Check your inbox for a confirmation.</p>
+  </div>
+
+</div>
+
+<script>
+  // Checkbox styling
+  document.querySelectorAll('.checkbox-item input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      cb.closest('.checkbox-item').classList.toggle('checked', cb.checked);
+    });
+  });
+
+  // Form submit
+  document.getElementById('form').addEventListener('submit', e => {
+    e.preventDefault();
+    document.getElementById('form').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+  });
+</script>
+</body>
+</html>

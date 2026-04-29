@@ -21,12 +21,6 @@ An automated reporting system that reads data from Google Sheets, analyzes it wi
 
 ---
 
-## 🎬 Demo
-
-> 📹 [Watch the demo](#) 
-
----
-
 ## 🛠️ Tech Stack
 
 | Tool | Purpose |
